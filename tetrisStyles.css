@@ -1,1 +1,390 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap');
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: linear-gradient(135deg, #0038b8 0%, #ffffff 50%, #0038b8 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Israel flag stripes background */
+        .flag-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(
+                to bottom,
+                #ffffff 0%,
+                #ffffff 15%,
+                #0038b8 15%,
+                #0038b8 25%,
+                #ffffff 25%,
+                #ffffff 75%,
+                #0038b8 75%,
+                #0038b8 85%,
+                #ffffff 85%,
+                #ffffff 100%
+            );
+            opacity: 0.15;
+        }
+
+        /* Star of David decorations */
+        .star-decoration {
+            position: fixed;
+            color: #0038b8;
+            opacity: 0.1;
+            font-size: 100px;
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .star-1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .star-2 { top: 60%; right: 5%; animation-delay: 2s; }
+        .star-3 { bottom: 10%; left: 10%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            text-align: center;
+            background: linear-gradient(135deg, #0038b8, #002a8a);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 56, 184, 0.4);
+            border: 3px solid white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '✡';
+            position: absolute;
+            font-size: 150px;
+            opacity: 0.1;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 900;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        /* Main clicker area */
+        .gameArea {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0, 56, 184, 0.2);
+            border: 3px solid #0038b8;
+            position: relative;
+        }
+
+        .stats {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .teague-count {
+            font-size: 3.5em;
+            font-weight: 900;
+            color: #0038b8;
+            text-shadow: 2px 2px 0 #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff;
+        }
+
+        .teague-label {
+            font-size: 1.3em;
+            color: #666;
+            font-weight: 700;
+        }
+
+        .per-click {
+            margin-top: 10px;
+            font-size: 1.1em;
+            color: #0038b8;
+            font-weight: 700;
+        }
+
+        .per-click span {
+            color: #d4af37;
+        }
+
+        /* Clickable image */
+        .clicker-container {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .clicker-container:active {
+            transform: scale(0.95);
+        }
+
+        .clicker-image {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid #0038b8;
+            box-shadow: 
+                0 0 0 4px white,
+                0 0 0 8px #0038b8,
+                0 20px 60px rgba(0, 56, 184, 0.4);
+            transition: all 0.2s;
+        }
+
+        .clicker-container:hover .clicker-image {
+            box-shadow: 
+                0 0 0 4px white,
+                0 0 0 8px #0038b8,
+                0 0 40px rgba(0, 56, 184, 0.6),
+                0 25px 70px rgba(0, 56, 184, 0.5);
+            transform: scale(1.02);
+        }
+
+        .clicker-container:active .clicker-image {
+            transform: scale(0.95);
+        }
+
+        /* Floating text animation */
+        .floating-text {
+            position: absolute;
+            font-weight: 900;
+            font-size: 1.5em;
+            color: #0038b8;
+            pointer-events: none;
+            animation: floatUp 1s ease-out forwards;
+            text-shadow: 1px 1px 2px white;
+            z-index: 100;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-80px) scale(1.3);
+            }
+        }
+
+        /* Click ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0, 56, 184, 0.3);
+            transform: scale(0);
+            animation: rippleEffect 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes rippleEffect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+
+
+        /* Achievements */
+        .achievements {
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 15px 40px rgba(0, 56, 184, 0.2);
+            border: 3px solid #0038b8;
+        }
+
+        .achievements h2 {
+            text-align: center;
+            color: #0038b8;
+            margin-bottom: 15px;
+        }
+
+        .achievement-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .achievement {
+            background: #e9ecef;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #666;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .achievement.unlocked {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            color: #155724;
+            border-color: #28a745;
+            font-weight: 700;
+        }
+
+        /* Save/Reset buttons */
+        .controls {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1em;
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, #0038b8, #002a8a);
+            color: white;
+        }
+
+        .btn-reset {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Particles */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        .particle.star {
+            color: #0038b8;
+            font-size: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+          
+            .clicker-image {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .teague-count {
+                font-size: 2.5em;
+            }
+        }
+
+        /* Confetti for final upgrade */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+            animation: confetti-fall 3s ease-out forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                opacity: 1;
+                transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(720deg);
+            }
+        }
+
+        /* Victory message */
+        .victory-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #0038b8, #002a8a);
+            color: white;
+            padding: 40px 60px;
+            border-radius: 20px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            border: 5px solid #d4af37;
+            display: none;
+        }
+
+        .victory-message.show {
+            display: block;
+            animation: victoryPop 0.5s ease-out;
+        }
+
+        @keyframes victoryPop {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            80% { transform: translate(-50%, -50%) scale(1.1); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .victory-message h2 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .victory-message p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .victory-message .btn {
+            background: #d4af37;
+            color: #0038b8;
+        }
