@@ -146,7 +146,7 @@
         }
 
         /* Clickable image */
-        .clicker-container {
+        .game-container {
             position: relative;
             cursor: pointer;
             transition: transform 0.1s;
